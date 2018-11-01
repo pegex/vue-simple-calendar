@@ -13,63 +13,77 @@
 			noIntl: !supportsIntl,
 		}
 	]">
-		<slot :header-props="headerProps" name="header" />
-		<div class="cv-header-days">
-			<template v-for="(label, index) in weekdayNames">
-				<slot :index="getColumnDOWClass(index)" :label="label" name="dayHeader">
-					<div :key="getColumnDOWClass(index)" :class="getColumnDOWClass(index)" class="cv-header-day">{{ label }}</div>
-				</slot>
-			</template>
-		</div>
-		<div class="cv-weeks">
-			<div v-for="(weekStart, weekIndex) in weeksOfPeriod"
-				:key="`${weekIndex}-week`"
-				:class="['cv-week', 'week' + (weekIndex+1), 'ws' + isoYearMonthDay(weekStart)]">
-				<div v-for="(day, dayIndex) in daysOfWeek(weekStart)"
-					:key="getColumnDOWClass(dayIndex)"
-					:class="[
-						'cv-day',
-						getColumnDOWClass(dayIndex),
-						'd' + isoYearMonthDay(day),
-						'd' + isoMonthDay(day),
-						'd' + paddedDay(day),
-						'instance' + instanceOfMonth(day),
-						{
-							outsideOfMonth: !isSameMonth(day, defaultedShowDate),
-							today: isSameDate(day, today()),
-							past: isInPast(day),
-							future: isInFuture(day),
-							last: isLastDayOfMonth(day),
-							lastInstance: isLastInstanceOfMonth(day)
-						},
-						...((dateClasses && dateClasses[isoYearMonthDay(day)]) || null)
-					]"
-					@click="onClickDay(day)"
-					@drop.prevent="onDrop(day, $event)"
-					@dragover.prevent="onDragOver(day)"
-					@dragenter.prevent="onDragEnter(day, $event)"
-					@dragleave.prevent="onDragLeave(day, $event)"
-				>
-					<div class="cv-day-number">{{ day.getDate() }}</div>
-					<slot :day="day" name="dayContent" />
+		<slot :header-props="slotProps" name="header" />
+		<div class="cv-main">
+			<div class="cv-main-calendar">
+				<div class="cv-header-days">
+					<template v-for="(label, index) in weekdayNames">
+						<slot :index="getColumnDOWClass(index)" :label="label" name="dayHeader">
+							<div :key="getColumnDOWClass(index)" :class="getColumnDOWClass(index)" class="cv-header-day">{{ label }}</div>
+						</slot>
+					</template>
 				</div>
-				<template v-for="e in getWeekEvents(weekStart)">
-					<slot :event="e" :weekStartDate="weekStart" :top="getEventTop(e)" name="event">
-						<div
-							:key="e.id"
-							:draggable="enableDragDrop"
-							:class="e.classes"
-							:title="e.title"
-							:style="`top:${getEventTop(e)};${e.originalEvent.style}`"
-							class="cv-event"
-							@dragstart="onDragStart(e, $event)"
-							@mouseenter="onMouseEnter(e)"
-							@mouseleave="onMouseLeave"
-							@click.stop="onClickEvent(e)"
-							v-html="getEventTitle(e)"/>
-					</slot>
-				</template>
+				<div class="cv-weeks">
+					<div v-for="(weekStart, weekIndex) in weeksOfPeriod"
+						:key="`${weekIndex}-week`"
+						:ref="`${weekIndex}-week`"
+						:class="['cv-week', 'week' + (weekIndex+1), 'ws' + isoYearMonthDay(weekStart), {'cv-week--expanded': weekHeights[weekIndex] && weekHeights[weekIndex].expanded}]"
+						:style="weekHeights[weekIndex] && weekHeights[weekIndex].expanded ? 'height:' + weekHeights[weekIndex].contentHeight + 'px' : undefined">
+						<div v-for="(day, dayIndex) in daysOfWeek(weekStart)"
+							:key="getColumnDOWClass(dayIndex)"
+							:class="[
+								'cv-day',
+								getColumnDOWClass(dayIndex),
+								'd' + isoYearMonthDay(day),
+								'd' + isoMonthDay(day),
+								'd' + paddedDay(day),
+								'instance' + instanceOfMonth(day),
+								{
+									outsideOfMonth: !isSameMonth(day, defaultedShowDate),
+									today: isSameDate(day, today()),
+									past: isInPast(day),
+									future: isInFuture(day),
+									last: isLastDayOfMonth(day),
+									lastInstance: isLastInstanceOfMonth(day)
+								},
+								...((dateClasses && dateClasses[isoYearMonthDay(day)]) || null)
+							]"
+							@click="onClickDay(day)"
+							@drop.prevent="onDrop(day, $event)"
+							@dragover.prevent="onDragOver(day)"
+							@dragenter.prevent="onDragEnter(day, $event)"
+							@dragleave.prevent="onDragLeave(day, $event)"
+						>
+							<div class="cv-day-number">{{ day.getDate() }}</div>
+							<slot :day="day" name="dayContent" />
+						</div>
+						<template v-for="e in getWeekEvents(weekStart)">
+							<slot :event="e" :weekStartDate="weekStart" :top="getEventTop(e)" name="event">
+								<div
+									:key="e.id"
+									:draggable="enableDragDrop"
+									:class="e.classes"
+									:title="e.title"
+									:style="`top:${getEventTop(e)};${e.originalEvent.style}`"
+									class="cv-event"
+									@dragstart="onDragStart(e, $event)"
+									@mouseenter="onMouseEnter(e)"
+									@mouseleave="onMouseLeave"
+									@click.stop="onClickEvent(e)"
+									v-html="getEventTitle(e)"/>
+							</slot>
+						</template>
+						<button v-if="weekHeights[weekIndex] && weekHeights[weekIndex].overflow"
+							type="button"
+							class="cv-week-expander"
+							@click="toggleWeekExpansion(weekIndex)">
+							<span v-if="!weekHeights[weekIndex].expanded">{{ weekExpanderText }}</span>
+							<span v-else>&mdash;</span>
+						</button>
+					</div>
+				</div>
 			</div>
+			<slot :panel-props="slotProps" name="panel" />
 		</div>
 	</div>
 </template>
@@ -102,13 +116,16 @@ export default {
 		dateClasses: { type: Object, default: () => {} },
 		eventTop: { type: String, default: "1.4em" },
 		eventContentHeight: { type: String, default: "1.4em" },
+		calendarHeight: { type: Number, default: 450 },
 		eventBorderHeight: { type: String, default: "2px" },
 		periodChangedCallback: { type: Function, default: undefined },
+		weekExpanderText: { type: String, default: "+" },
 	},
 
 	data: () => ({
 		currentDragEvent: null,
 		currentHoveredEventId: undefined,
+		weekHeights: [],
 	}),
 
 	computed: {
@@ -215,7 +232,7 @@ export default {
 				this.monthNames
 			)
 		},
-		headerProps() {
+		slotProps() {
 			return {
 				// Dates for UI navigation
 				previousYear: this.getIncrementedPeriod(-12),
@@ -249,6 +266,9 @@ export default {
 				displayLastDate: this.displayLastDate,
 			}
 		},
+		eventsLength() {
+			return this.events.length
+		},
 	},
 
 	watch: {
@@ -261,6 +281,20 @@ export default {
 				}
 			},
 		},
+		calendarHeight: {
+			handler() {
+				this.measureWeekHeights()
+			},
+		},
+		eventsLength: {
+			handler() {
+				this.measureWeekHeights()
+			},
+		},
+	},
+
+	mounted() {
+		this.measureWeekHeights()
 	},
 
 	methods: {
@@ -428,6 +462,8 @@ export default {
 						eventRows[d][ep.eventRow] = true
 					}
 				}
+				ep.offset = startOffset
+				ep.span = span
 				ep.classes.push(`offset${startOffset}`)
 				ep.classes.push(`span${span}`)
 				results.push(ep)
@@ -472,6 +508,34 @@ export default {
 			const h = this.eventContentHeight
 			const b = this.eventBorderHeight
 			return `calc(${this.eventTop} + ${r}*${h} + ${r}*${b})`
+		},
+
+		measureWeekHeights() {
+			this.$nextTick(() => {
+				this.weekHeights.length = this.weeksOfPeriod.length
+				for (let i = 0; i < this.weeksOfPeriod.length; i++) {
+					if (this.$refs[i + "-week"]) {
+						let weekRowEl = this.$refs[i + "-week"][0]
+						this.$set(this.weekHeights, i, {
+							contentHeight: weekRowEl.scrollHeight + 15,
+							rowHeight: weekRowEl.clientHeight,
+							overflow: weekRowEl.scrollHeight - weekRowEl.clientHeight,
+							expanded: false,
+						})
+					}
+				}
+			})
+		},
+
+		toggleWeekExpansion(weekIndex) {
+			let newState = !this.weekHeights[weekIndex].expanded
+
+			// Collapse all weeks
+			for (let i = 0; i < this.weekHeights.length; i++) {
+				this.weekHeights[i].expanded = false
+			}
+
+			this.weekHeights[weekIndex].expanded = newState
 		},
 	},
 }
@@ -547,16 +611,35 @@ header are in the CalendarViewHeader component.
 	/* Shorthand flex: 1 1 0 not supported by IE11 */
 	flex-grow: 1;
 	flex-shrink: 0;
-	flex-basis: 0;
 	flex-flow: row nowrap;
-	min-height: 3em;
+	min-height: 2em;
 	border-width: 0;
-
-	/* Allow week events to scroll if they are too tall */
 	position: relative;
 	width: 100%;
-	overflow-y: auto;
+	overflow: hidden;
+}
+
+.cv-week--expanded {
+	flex-grow: 0; /* Ensure expanded week isn't taller than necessary */
+	overflow-y: auto; /* Allow week events to scroll if they are too tall */
 	-ms-overflow-style: none;
+}
+
+.cv-week-expander {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 0;
+	width: 100%;
+	padding: 1px 0;
+	text-align: center;
+	background: #ddd;
+	font-size: 10px;
+	line-height: 10px;
+	font-weight: normal;
+	opacity: 0.7;
+	cursor: pointer;
 }
 
 .cv-day {
