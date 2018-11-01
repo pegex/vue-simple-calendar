@@ -26,53 +26,55 @@
 				<div class="cv-weeks">
 					<div v-for="(weekStart, weekIndex) in weeksOfPeriod"
 						:key="`${weekIndex}-week`"
-						:ref="`${weekIndex}-week`"
-						:class="['cv-week', 'week' + (weekIndex+1), 'ws' + isoYearMonthDay(weekStart), {'cv-week--expanded': weekHeights[weekIndex] && weekHeights[weekIndex].expanded}]"
-						:style="weekHeights[weekIndex] && weekHeights[weekIndex].expanded ? 'height:' + weekHeights[weekIndex].contentHeight + 'px' : undefined">
-						<div v-for="(day, dayIndex) in daysOfWeek(weekStart)"
-							:key="getColumnDOWClass(dayIndex)"
-							:class="[
-								'cv-day',
-								getColumnDOWClass(dayIndex),
-								'd' + isoYearMonthDay(day),
-								'd' + isoMonthDay(day),
-								'd' + paddedDay(day),
-								'instance' + instanceOfMonth(day),
-								{
-									outsideOfMonth: !isSameMonth(day, defaultedShowDate),
-									today: isSameDate(day, today()),
-									past: isInPast(day),
-									future: isInFuture(day),
-									last: isLastDayOfMonth(day),
-									lastInstance: isLastInstanceOfMonth(day)
-								},
-								...((dateClasses && dateClasses[isoYearMonthDay(day)]) || null)
-							]"
-							@click="onClickDay(day)"
-							@drop.prevent="onDrop(day, $event)"
-							@dragover.prevent="onDragOver(day)"
-							@dragenter.prevent="onDragEnter(day, $event)"
-							@dragleave.prevent="onDragLeave(day, $event)"
-						>
-							<div class="cv-day-number">{{ day.getDate() }}</div>
-							<slot :day="day" name="dayContent" />
+						:class="['cv-week-row', {'cv-week-row--expanded': weekHeights[weekIndex] && weekHeights[weekIndex].expanded}]">
+						<div :ref="`${weekIndex}-week`"
+							:class="['cv-week', 'week' + (weekIndex+1), 'ws' + isoYearMonthDay(weekStart)]"
+							:style="weekHeights[weekIndex] && weekHeights[weekIndex].expanded ? 'height:' + weekHeights[weekIndex].contentHeight + 'px' : undefined">
+							<div v-for="(day, dayIndex) in daysOfWeek(weekStart)"
+								:key="getColumnDOWClass(dayIndex)"
+								:class="[
+									'cv-day',
+									getColumnDOWClass(dayIndex),
+									'd' + isoYearMonthDay(day),
+									'd' + isoMonthDay(day),
+									'd' + paddedDay(day),
+									'instance' + instanceOfMonth(day),
+									{
+										outsideOfMonth: !isSameMonth(day, defaultedShowDate),
+										today: isSameDate(day, today()),
+										past: isInPast(day),
+										future: isInFuture(day),
+										last: isLastDayOfMonth(day),
+										lastInstance: isLastInstanceOfMonth(day)
+									},
+									...((dateClasses && dateClasses[isoYearMonthDay(day)]) || null)
+								]"
+								@click="onClickDay(day)"
+								@drop.prevent="onDrop(day, $event)"
+								@dragover.prevent="onDragOver(day)"
+								@dragenter.prevent="onDragEnter(day, $event)"
+								@dragleave.prevent="onDragLeave(day, $event)"
+							>
+								<div class="cv-day-number">{{ day.getDate() }}</div>
+								<slot :day="day" name="dayContent" />
+							</div>
+							<template v-for="e in getWeekEvents(weekStart)">
+								<slot :event="e" :weekStartDate="weekStart" :top="getEventTop(e)" name="event">
+									<div
+										:key="e.id"
+										:draggable="enableDragDrop"
+										:class="e.classes"
+										:title="e.title"
+										:style="`top:${getEventTop(e)};${e.originalEvent.style}`"
+										class="cv-event"
+										@dragstart="onDragStart(e, $event)"
+										@mouseenter="onMouseEnter(e)"
+										@mouseleave="onMouseLeave"
+										@click.stop="onClickEvent(e)"
+										v-html="getEventTitle(e)"/>
+								</slot>
+							</template>
 						</div>
-						<template v-for="e in getWeekEvents(weekStart)">
-							<slot :event="e" :weekStartDate="weekStart" :top="getEventTop(e)" name="event">
-								<div
-									:key="e.id"
-									:draggable="enableDragDrop"
-									:class="e.classes"
-									:title="e.title"
-									:style="`top:${getEventTop(e)};${e.originalEvent.style}`"
-									class="cv-event"
-									@dragstart="onDragStart(e, $event)"
-									@mouseenter="onMouseEnter(e)"
-									@mouseleave="onMouseLeave"
-									@click.stop="onClickEvent(e)"
-									v-html="getEventTitle(e)"/>
-							</slot>
-						</template>
 						<button v-if="weekHeights[weekIndex] && weekHeights[weekIndex].overflow"
 							type="button"
 							class="cv-week-expander"
@@ -517,7 +519,7 @@ export default {
 					if (this.$refs[i + "-week"]) {
 						let weekRowEl = this.$refs[i + "-week"][0]
 						this.$set(this.weekHeights, i, {
-							contentHeight: weekRowEl.scrollHeight + 15,
+							contentHeight: weekRowEl.scrollHeight + 5,
 							rowHeight: weekRowEl.clientHeight,
 							overflow: weekRowEl.scrollHeight - weekRowEl.clientHeight,
 							expanded: false,
@@ -598,6 +600,7 @@ header are in the CalendarViewHeader component.
 	flex-shrink: 1;
 	flex-basis: auto;
 	flex-flow: column nowrap;
+	height: 100%;
 	border-width: 0 0 1px 1px;
 
 	/* Allow grid to scroll if there are too may weeks to fit in the view */
@@ -605,12 +608,22 @@ header are in the CalendarViewHeader component.
 	-ms-overflow-style: none;
 }
 
-/* Use flex basis of 0 on week row so all weeks will be same height regardless of content */
+.cv-week-row {
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-direction: column;
+}
+
+.cv-week-row--expanded {
+	flex-grow: 0; /* Ensure expanded week isn't taller than necessary */
+	max-height: 50%;
+}
+
 .cv-week {
 	display: flex;
 	/* Shorthand flex: 1 1 0 not supported by IE11 */
 	flex-grow: 1;
-	flex-shrink: 0;
 	flex-flow: row nowrap;
 	min-height: 2em;
 	border-width: 0;
@@ -619,17 +632,14 @@ header are in the CalendarViewHeader component.
 	overflow: hidden;
 }
 
-.cv-week--expanded {
+.cv-week-row--expanded .cv-week {
 	flex-grow: 0; /* Ensure expanded week isn't taller than necessary */
 	overflow-y: auto; /* Allow week events to scroll if they are too tall */
 	-ms-overflow-style: none;
 }
 
 .cv-week-expander {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	flex-grow: 0;
 	border: 0;
 	width: 100%;
 	padding: 1px 0;
@@ -638,7 +648,6 @@ header are in the CalendarViewHeader component.
 	font-size: 10px;
 	line-height: 10px;
 	font-weight: normal;
-	opacity: 0.7;
 	cursor: pointer;
 }
 

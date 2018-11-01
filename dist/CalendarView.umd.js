@@ -725,7 +725,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, "\n.cv-wrapper{display:flex;flex-direction:column;flex-grow:1;height:100%;max-height:100%;min-height:100%;overflow-x:hidden;overflow-y:hidden\n}\n.cv-wrapper,.cv-wrapper div{box-sizing:border-box;font-size:1em;line-height:1em\n}\n.cv-header-days{border-width:0 0 0 1px;flex-basis:auto;flex-grow:0\n}\n.cv-header-day,.cv-header-days{display:flex;flex-flow:row nowrap;flex-shrink:0\n}\n.cv-header-day{align-items:center;border-width:1px 1px 0 0;flex-basis:0;flex-grow:1;justify-content:center;text-align:center\n}\n.cv-weeks{-ms-overflow-style:none;border-width:0 0 1px 1px;flex-basis:auto;flex-flow:column nowrap;flex-shrink:1;overflow-y:auto\n}\n.cv-week,.cv-weeks{display:flex;flex-grow:1\n}\n.cv-week{border-width:0;flex-flow:row nowrap;flex-shrink:0;min-height:2em;overflow:hidden;position:relative;width:100%\n}\n.cv-week--expanded{-ms-overflow-style:none;flex-grow:0;overflow-y:auto\n}\n.cv-week-expander{background:#ddd;border:0;bottom:0;cursor:pointer;font-size:10px;font-weight:400;left:0;line-height:10px;opacity:.7;padding:1px 0;position:absolute;right:0;text-align:center;width:100%\n}\n.cv-day{border-width:1px 1px 0 0;display:flex;flex-basis:0;flex-grow:1;flex-shrink:0;position:relative;position:sticky;top:0\n}\n.cv-day-number{position:absolute;right:0\n}\n.cv-event{background-color:#f7f7f7;border-width:1px;overflow:hidden;position:absolute;white-space:nowrap\n}\n.cv-wrapper.wrap-event-title-on-hover .cv-event:hover{white-space:normal;z-index:1\n}\n.cv-day,.cv-event,.cv-header-day,.cv-header-days,.cv-week,.cv-weeks{border-color:#ddd;border-style:solid\n}\n.cv-event .endTime:before{content:\"-\"\n}\n.cv-day-number,.cv-event,.cv-header-day{padding:.2em\n}\n.cv-day-number:before{margin-right:.5em\n}\n.cv-event.offset0{left:0\n}\n.cv-event.offset1{left:14.28571%\n}\n.cv-event.offset2{left:28.57143%\n}\n.cv-event.offset3{left:42.85714%\n}\n.cv-event.offset4{left:57.14286%\n}\n.cv-event.offset5{left:71.42857%\n}\n.cv-event.offset6{left:85.71429%\n}\n.cv-event.span1{width:calc(14.28571% - .05em)\n}\n.cv-event.span2{width:calc(28.57143% - .05em)\n}\n.cv-event.span3{text-align:center;width:calc(42.85714% - .05em)\n}\n.cv-event.span4{text-align:center;width:calc(57.14286% - .05em)\n}\n.cv-event.span5{text-align:center;width:calc(71.42857% - .05em)\n}\n.cv-event.span6{text-align:center;width:calc(85.71429% - .05em)\n}\n.cv-event.span7{text-align:center;width:calc(100% - .05em)\n}\n.cv-week::-webkit-scrollbar,.cv-weeks::-webkit-scrollbar{background:transparent;width:0\n}", ""]);
+exports.push([module.i, "\n.cv-wrapper{display:flex;flex-direction:column;flex-grow:1;height:100%;max-height:100%;min-height:100%;overflow-x:hidden;overflow-y:hidden\n}\n.cv-wrapper,.cv-wrapper div{box-sizing:border-box;font-size:1em;line-height:1em\n}\n.cv-header-days{border-width:0 0 0 1px;flex-basis:auto;flex-grow:0\n}\n.cv-header-day,.cv-header-days{display:flex;flex-flow:row nowrap;flex-shrink:0\n}\n.cv-header-day{align-items:center;border-width:1px 1px 0 0;flex-basis:0;flex-grow:1;justify-content:center;text-align:center\n}\n.cv-weeks{-ms-overflow-style:none;border-width:0 0 1px 1px;flex-basis:auto;flex-flow:column nowrap;flex-shrink:1;height:100%;overflow-y:auto\n}\n.cv-week-row,.cv-weeks{display:flex;flex-grow:1\n}\n.cv-week-row{flex-direction:column;flex-shrink:0\n}\n.cv-week-row--expanded{flex-grow:0;max-height:50%\n}\n.cv-week{border-width:0;display:flex;flex-flow:row nowrap;flex-grow:1;min-height:2em;overflow:hidden;position:relative;width:100%\n}\n.cv-week-row--expanded .cv-week{-ms-overflow-style:none;flex-grow:0;overflow-y:auto\n}\n.cv-week-expander{background:#ddd;border:0;cursor:pointer;flex-grow:0;font-size:10px;font-weight:400;line-height:10px;padding:1px 0;text-align:center;width:100%\n}\n.cv-day{border-width:1px 1px 0 0;display:flex;flex-basis:0;flex-grow:1;flex-shrink:0;position:relative;position:sticky;top:0\n}\n.cv-day-number{position:absolute;right:0\n}\n.cv-event{background-color:#f7f7f7;border-width:1px;overflow:hidden;position:absolute;white-space:nowrap\n}\n.cv-wrapper.wrap-event-title-on-hover .cv-event:hover{white-space:normal;z-index:1\n}\n.cv-day,.cv-event,.cv-header-day,.cv-header-days,.cv-week,.cv-weeks{border-color:#ddd;border-style:solid\n}\n.cv-event .endTime:before{content:\"-\"\n}\n.cv-day-number,.cv-event,.cv-header-day{padding:.2em\n}\n.cv-day-number:before{margin-right:.5em\n}\n.cv-event.offset0{left:0\n}\n.cv-event.offset1{left:14.28571%\n}\n.cv-event.offset2{left:28.57143%\n}\n.cv-event.offset3{left:42.85714%\n}\n.cv-event.offset4{left:57.14286%\n}\n.cv-event.offset5{left:71.42857%\n}\n.cv-event.offset6{left:85.71429%\n}\n.cv-event.span1{width:calc(14.28571% - .05em)\n}\n.cv-event.span2{width:calc(28.57143% - .05em)\n}\n.cv-event.span3{text-align:center;width:calc(42.85714% - .05em)\n}\n.cv-event.span4{text-align:center;width:calc(57.14286% - .05em)\n}\n.cv-event.span5{text-align:center;width:calc(71.42857% - .05em)\n}\n.cv-event.span6{text-align:center;width:calc(85.71429% - .05em)\n}\n.cv-event.span7{text-align:center;width:calc(100% - .05em)\n}\n.cv-week::-webkit-scrollbar,.cv-weeks::-webkit-scrollbar{background:transparent;width:0\n}", ""]);
 
 // exports
 
@@ -2101,7 +2101,7 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 var setPublicPath = __webpack_require__("1eb2");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"d50f023a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CalendarView.vue?vue&type=template&id=2afe64f3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"d50f023a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CalendarView.vue?vue&type=template&id=46f62a92&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[
 	'cv-wrapper',
 	'locale-' + _vm.languageCode(_vm.displayLocale),
@@ -2115,26 +2115,26 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 		future: _vm.isFutureMonth(_vm.periodStart),
 		noIntl: !_vm.supportsIntl,
 	}
-]},[_vm._t("header",null,{headerProps:_vm.slotProps}),_c('div',{staticClass:"cv-main"},[_c('div',{staticClass:"cv-main-calendar"},[_c('div',{staticClass:"cv-header-days"},[_vm._l((_vm.weekdayNames),function(label,index){return [_vm._t("dayHeader",[_c('div',{key:_vm.getColumnDOWClass(index),staticClass:"cv-header-day",class:_vm.getColumnDOWClass(index)},[_vm._v(_vm._s(label))])],{index:_vm.getColumnDOWClass(index),label:label})]})],2),_c('div',{staticClass:"cv-weeks"},_vm._l((_vm.weeksOfPeriod),function(weekStart,weekIndex){return _c('div',{key:(weekIndex + "-week"),ref:(weekIndex + "-week"),refInFor:true,class:['cv-week', 'week' + (weekIndex+1), 'ws' + _vm.isoYearMonthDay(weekStart), {'cv-week--expanded': _vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].expanded}],style:(_vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].expanded ? 'height:' + _vm.weekHeights[weekIndex].contentHeight + 'px' : undefined)},[_vm._l((_vm.daysOfWeek(weekStart)),function(day,dayIndex){return _c('div',{key:_vm.getColumnDOWClass(dayIndex),class:[
-							'cv-day',
-							_vm.getColumnDOWClass(dayIndex),
-							'd' + _vm.isoYearMonthDay(day),
-							'd' + _vm.isoMonthDay(day),
-							'd' + _vm.paddedDay(day),
-							'instance' + _vm.instanceOfMonth(day),
-							{
-								outsideOfMonth: !_vm.isSameMonth(day, _vm.defaultedShowDate),
-								today: _vm.isSameDate(day, _vm.today()),
-								past: _vm.isInPast(day),
-								future: _vm.isInFuture(day),
-								last: _vm.isLastDayOfMonth(day),
-								lastInstance: _vm.isLastInstanceOfMonth(day)
-							} ].concat( ((_vm.dateClasses && _vm.dateClasses[_vm.isoYearMonthDay(day)]) || null)
-						),on:{"click":function($event){_vm.onClickDay(day)},"drop":function($event){$event.preventDefault();_vm.onDrop(day, $event)},"dragover":function($event){$event.preventDefault();_vm.onDragOver(day)},"dragenter":function($event){$event.preventDefault();_vm.onDragEnter(day, $event)},"dragleave":function($event){$event.preventDefault();_vm.onDragLeave(day, $event)}}},[_c('div',{staticClass:"cv-day-number"},[_vm._v(_vm._s(day.getDate()))]),_vm._t("dayContent",null,{day:day})],2)}),_vm._l((_vm.getWeekEvents(weekStart)),function(e){return [_vm._t("event",[_c('div',{key:e.id,staticClass:"cv-event",class:e.classes,style:(("top:" + (_vm.getEventTop(e)) + ";" + (e.originalEvent.style))),attrs:{"draggable":_vm.enableDragDrop,"title":e.title},domProps:{"innerHTML":_vm._s(_vm.getEventTitle(e))},on:{"dragstart":function($event){_vm.onDragStart(e, $event)},"mouseenter":function($event){_vm.onMouseEnter(e)},"mouseleave":_vm.onMouseLeave,"click":function($event){$event.stopPropagation();_vm.onClickEvent(e)}}})],{event:e,weekStartDate:weekStart,top:_vm.getEventTop(e)})]}),(_vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].overflow)?_c('button',{staticClass:"cv-week-expander",attrs:{"type":"button"},on:{"click":function($event){_vm.toggleWeekExpansion(weekIndex)}}},[(!_vm.weekHeights[weekIndex].expanded)?_c('span',[_vm._v(_vm._s(_vm.weekExpanderText))]):_c('span',[_vm._v("—")])]):_vm._e()],2)}))]),_vm._t("panel",null,{panelProps:_vm.slotProps})],2)],2)}
+]},[_vm._t("header",null,{headerProps:_vm.slotProps}),_c('div',{staticClass:"cv-main"},[_c('div',{staticClass:"cv-main-calendar"},[_c('div',{staticClass:"cv-header-days"},[_vm._l((_vm.weekdayNames),function(label,index){return [_vm._t("dayHeader",[_c('div',{key:_vm.getColumnDOWClass(index),staticClass:"cv-header-day",class:_vm.getColumnDOWClass(index)},[_vm._v(_vm._s(label))])],{index:_vm.getColumnDOWClass(index),label:label})]})],2),_c('div',{staticClass:"cv-weeks"},_vm._l((_vm.weeksOfPeriod),function(weekStart,weekIndex){return _c('div',{key:(weekIndex + "-week"),class:['cv-week-row', {'cv-week-row--expanded': _vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].expanded}]},[_c('div',{ref:(weekIndex + "-week"),refInFor:true,class:['cv-week', 'week' + (weekIndex+1), 'ws' + _vm.isoYearMonthDay(weekStart)],style:(_vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].expanded ? 'height:' + _vm.weekHeights[weekIndex].contentHeight + 'px' : undefined)},[_vm._l((_vm.daysOfWeek(weekStart)),function(day,dayIndex){return _c('div',{key:_vm.getColumnDOWClass(dayIndex),class:[
+								'cv-day',
+								_vm.getColumnDOWClass(dayIndex),
+								'd' + _vm.isoYearMonthDay(day),
+								'd' + _vm.isoMonthDay(day),
+								'd' + _vm.paddedDay(day),
+								'instance' + _vm.instanceOfMonth(day),
+								{
+									outsideOfMonth: !_vm.isSameMonth(day, _vm.defaultedShowDate),
+									today: _vm.isSameDate(day, _vm.today()),
+									past: _vm.isInPast(day),
+									future: _vm.isInFuture(day),
+									last: _vm.isLastDayOfMonth(day),
+									lastInstance: _vm.isLastInstanceOfMonth(day)
+								} ].concat( ((_vm.dateClasses && _vm.dateClasses[_vm.isoYearMonthDay(day)]) || null)
+							),on:{"click":function($event){_vm.onClickDay(day)},"drop":function($event){$event.preventDefault();_vm.onDrop(day, $event)},"dragover":function($event){$event.preventDefault();_vm.onDragOver(day)},"dragenter":function($event){$event.preventDefault();_vm.onDragEnter(day, $event)},"dragleave":function($event){$event.preventDefault();_vm.onDragLeave(day, $event)}}},[_c('div',{staticClass:"cv-day-number"},[_vm._v(_vm._s(day.getDate()))]),_vm._t("dayContent",null,{day:day})],2)}),_vm._l((_vm.getWeekEvents(weekStart)),function(e){return [_vm._t("event",[_c('div',{key:e.id,staticClass:"cv-event",class:e.classes,style:(("top:" + (_vm.getEventTop(e)) + ";" + (e.originalEvent.style))),attrs:{"draggable":_vm.enableDragDrop,"title":e.title},domProps:{"innerHTML":_vm._s(_vm.getEventTitle(e))},on:{"dragstart":function($event){_vm.onDragStart(e, $event)},"mouseenter":function($event){_vm.onMouseEnter(e)},"mouseleave":_vm.onMouseLeave,"click":function($event){$event.stopPropagation();_vm.onClickEvent(e)}}})],{event:e,weekStartDate:weekStart,top:_vm.getEventTop(e)})]})],2),(_vm.weekHeights[weekIndex] && _vm.weekHeights[weekIndex].overflow)?_c('button',{staticClass:"cv-week-expander",attrs:{"type":"button"},on:{"click":function($event){_vm.toggleWeekExpansion(weekIndex)}}},[(!_vm.weekHeights[weekIndex].expanded)?_c('span',[_vm._v(_vm._s(_vm.weekExpanderText))]):_c('span',[_vm._v("—")])]):_vm._e()])}))]),_vm._t("panel",null,{panelProps:_vm.slotProps})],2)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/CalendarView.vue?vue&type=template&id=2afe64f3&
+// CONCATENATED MODULE: ./src/components/CalendarView.vue?vue&type=template&id=46f62a92&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/builtin/es6/arrayWithoutHoles.js
 function _arrayWithoutHoles(arr) {
@@ -2750,6 +2750,8 @@ component.options.__file = "CalendarViewHeader.vue"
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ var CalendarViewvue_type_script_lang_js_ = ({
@@ -3169,7 +3171,7 @@ component.options.__file = "CalendarViewHeader.vue"
             var weekRowEl = _this3.$refs[i + "-week"][0];
 
             _this3.$set(_this3.weekHeights, i, {
-              contentHeight: weekRowEl.scrollHeight + 15,
+              contentHeight: weekRowEl.scrollHeight + 5,
               rowHeight: weekRowEl.clientHeight,
               overflow: weekRowEl.scrollHeight - weekRowEl.clientHeight,
               expanded: false
