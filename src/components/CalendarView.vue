@@ -565,8 +565,7 @@ header are in the CalendarViewHeader component.
 	overflow-y: hidden;
 }
 
-.cv-wrapper,
-.cv-wrapper div {
+.cv-wrapper {
 	box-sizing: border-box;
 	line-height: 1em;
 	font-size: 1em;
